@@ -1,10 +1,18 @@
-<div class="dashboard">
+<div class="stock-layout">
   <header>
     <h1>Real-Time Stock Dashboard</h1>
   </header>
 
-  <div *ngIf="loading" class="loader">Loading market data...</div>
-  <div *ngIf="error" class="error">Failed to load data. Please refresh.</div>
+  <div *ngIf="loading" class="loader-overlay">
+    <div class="spinner"></div>
+    <p>Loading market data...</p>
+  </div>
+  
+  <div *ngIf="error" class="error">
+    <img src="../../assets/images/load-error.jpg" alt="Error" class="error-image">
+    <p>Failed to load data. Please refresh.</p>
+    <button (click)="retryLoad()" class="retry-btn">Retry</button>
+  </div>
 
   <div class="stock-grid" *ngIf="!loading && !error">
     <div *ngFor="let stock of stocks" class="stock-card" [ngClass]="{
@@ -13,11 +21,12 @@
 
       <div class="card-header">
         <h2>{{ stock.companyName }}
-        <div class="symbol">({{ stock.symbol }})</div></h2>        
+          <div class="symbol">({{ stock.symbol }})</div>
+        </h2>
       </div>
 
       <div class="price-section">
-        <div class="current-price">${{ stock.currentPrice | number:'1.2-2' }}</div>        
+        <div class="current-price">${{ stock.currentPrice | number:'1.2-2' }}</div>
       </div>
 
       <div class="daily-range">
@@ -42,9 +51,9 @@
         </div>
       </div>
 
-      <div class="last-update">        
+      <div class="last-update">
         <label class="toggle-switch">
-          <input type="checkbox" [checked]="stock.isActive" (change)="toggleStock(stock)">
+          <input type="checkbox" [checked]="stock.isActive" (change)="stockToggle(stock)">
           <span class="slider"></span>
         </label>
       </div>
