@@ -1,0 +1,53 @@
+<div class="dashboard">
+  <header>
+    <h1>Real-Time Stock Dashboard</h1>
+  </header>
+
+  <div *ngIf="loading" class="loader">Loading market data...</div>
+  <div *ngIf="error" class="error">Failed to load data. Please refresh.</div>
+
+  <div class="stock-grid" *ngIf="!loading && !error">
+    <div *ngFor="let stock of stocks" class="stock-card" [ngClass]="{
+            'price-up': stock.isActive && stock.percentChange > 0,
+       'price-down': stock.isActive && stock.percentChange < 0, 'card-grey':!stock.isActive}">
+
+      <div class="card-header">
+        <h2>{{ stock.companyName }}
+        <div class="symbol">({{ stock.symbol }})</div></h2>        
+      </div>
+
+      <div class="price-section">
+        <div class="current-price">${{ stock.currentPrice | number:'1.2-2' }}</div>        
+      </div>
+
+      <div class="daily-range">
+        <div class="range-item">
+          <span class="label"> Daily High</span>
+          <span class="value">${{ stock.dailyHigh | number:'1.2-2' }}</span>
+        </div>
+        <div class="range-item">
+          <span class="label"> Daily Low</span>
+          <span class="value">${{ stock.dailyLow | number:'1.2-2' }}</span>
+        </div>
+      </div>
+
+      <div class="year-range hide-on-mobile">
+        <div class="range-item">
+          <span class="label"> 52-Week High</span>
+          <span class="value">${{ stock.week52High | number:'1.2-2' }}</span>
+        </div>
+        <div class="range-item">
+          <span class="label"> 52-Week Low</span>
+          <span class="value">${{ stock.week52Low | number:'1.2-2' }}</span>
+        </div>
+      </div>
+
+      <div class="last-update">        
+        <label class="toggle-switch">
+          <input type="checkbox" [checked]="stock.isActive" (change)="toggleStock(stock)">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
