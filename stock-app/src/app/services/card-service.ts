@@ -16,6 +16,7 @@ export class CardService {
   // Track active subscriptions
   private activeSymbols = new Set<string>();
   private pendingSubscriptions: string[] = [];
+private heartbeatInterval: any;
 
   constructor(private http: HttpClient, private ngZone: NgZone) { }
 

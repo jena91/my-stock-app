@@ -24,7 +24,7 @@ export class StockDashboardComponent implements OnInit, OnDestroy {
     //----- get initial data
     this.getInitData();
     // ----- Connect WebSocket
-    this.cardService.connectWebSocket;
+    this.cardService.connectWebSocket();
 
     setTimeout(() => {
       this.symbols.forEach(sym => this.cardService.subscribeToSymbol(sym));
