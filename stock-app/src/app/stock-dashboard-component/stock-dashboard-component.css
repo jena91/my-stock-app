@@ -219,7 +219,6 @@ input:checked+.slider:after {
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  /* backdrop-filter: blur(4px); */
 }
 
 .spinner {
@@ -281,11 +280,5 @@ input:checked+.slider:after {
 
   .stock-layout {
     padding: 16px;
-  }
-}
-
-@media (max-width: 1200px) {
-  .stock-grid {
-    /* grid-template-columns: repeat(2, 1fr); */
   }
 }
